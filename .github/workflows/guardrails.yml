@@ -1,0 +1,31 @@
+name: Guardrails
+
+on:
+  pull_request:
+    branches: [ main ]
+
+jobs:
+  forbid-artifacts:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Block Terraform artifacts and secrets
+        run: |
+          set -e
+          echo "Checking for forbidden files..."
+
+          forbidden_regex='(^|/)\.terraform/|\.tfstate(\.|$)|\.tfvars(\.|$)|\.pem$'
+
+          # Check tracked files in the PR
+          files="$(git diff --name-only origin/main...HEAD || true)"
+
+          echo "$files" | grep -E "$forbidden_regex" && {
+            echo "Forbidden files detected in PR:"
+            echo "$files" | grep -E "$forbidden_regex"
+            exit 1
+          } || true
+
+          echo "OK: No forbidden files detected."

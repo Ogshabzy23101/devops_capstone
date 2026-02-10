@@ -1,0 +1,22 @@
+#!/usr/bin/env bash
+set -e
+
+forbidden_patterns=(
+  '\.terraform/'
+  '\.tfstate'
+  '\.tfvars'
+  '\.pem$'
+)
+
+staged_files="$(git diff --cached --name-only)"
+
+for pattern in "${forbidden_patterns[@]}"; do
+  if echo "$staged_files" | grep -E "$pattern" >/dev/null; then
+    echo "Blocked commit: staged files contain forbidden Terraform/secret artifacts ($pattern)"
+    echo "$staged_files" | grep -E "$pattern"
+    exit 1
+  fi
+done
+
+echo "Pre-commit check passed: no forbidden Terraform/secret artifacts staged."
+exit 0
