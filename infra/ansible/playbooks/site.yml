@@ -1,0 +1,7 @@
+- name: "update system and install git, curl, unzip"
+  hosts: web
+  become: true  
+
+  roles:
+    - common
+    - web

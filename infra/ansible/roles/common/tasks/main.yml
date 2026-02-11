@@ -1,0 +1,13 @@
+- name: "update system"
+  apt:
+    update_cache: yes
+    upgrade: dist
+  tags: update
+
+- name: "install git, curl, unzip"
+  apt:
+    name: "{{ common_packages }}"
+    state: present
+  tags: packages
+      
+    

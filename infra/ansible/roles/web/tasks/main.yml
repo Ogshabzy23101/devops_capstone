@@ -1,0 +1,19 @@
+- name: "install docker"
+  apt:
+    name: docker.io
+    state: present
+  tags: docker
+
+- name: "add ec2-user to docker group"
+  user:
+    name: ec2-user
+    groups: docker
+    append: yes
+  tags: docker
+
+- name: "enable and start docker service"
+  service:
+    name: docker
+    enabled: yes
+    state: started
+  tags: docker
