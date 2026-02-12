@@ -1,0 +1,248 @@
+@import url("https://fonts.googleapis.com/css2?family=Oswald:wght@200;600&display=swap");
+
+body {
+  font-family: "Oswald", sans-serif;
+  background-color: #212121;
+}
+
+.all-phone-section {
+  width: 90%;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.all-phone-section .row {
+  align-items: center;
+  margin-top: auto;
+}
+
+.card {
+  position: relative;
+  height: 400px;
+  width: 100%;
+  margin: 10px 0;
+  transition: ease all 2.3s;
+  perspective: 1200px;
+  background: url(../images/ai-generated-8657275_1280.jpg);
+  background-color: rgba(137, 136, 224, 0.788);
+  background-blend-mode: multiply;
+}
+
+.card:hover .cover {
+  transform: rotateX(0deg) rotateY(-180deg);
+}
+
+.card:hover .cover:before {
+  transform: translateZ(30px);
+}
+
+.card:hover .cover:after {
+  background-color: black;
+}
+
+.card:hover .cover h1 {
+  transform: translateZ(100px);
+}
+
+.card:hover .cover .price {
+  transform: translateZ(60px);
+}
+
+.card:hover .cover a {
+  transform: translateZ(-60px) rotatey(-180deg);
+}
+
+.card .cover {
+  position: absolute;
+  height: 100%;
+  width: 100%;
+  transform-style: preserve-3d;
+  transition: ease all 2.3s;
+  background-image: url(../images/waves-circles-109964_1280.jpg);
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-color: #413f3f5e;
+  background-blend-mode: multiply;
+  display: flex;
+  place-items: center;
+  /* Permalink - use to edit and share this gradient: https://colorzilla.com/gradient-editor/#000000+0,000000+100&0.65+0,0+100;Neutral+Density */
+
+  /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+}
+
+.card .cover:before {
+  content: "";
+  position: absolute;
+  border: 5px solid rgb(255, 255, 255);
+  box-shadow: 0 0 12px rgba(247, 2, 2, 0.3);
+  top: 20px;
+  left: 20px;
+  right: 20px;
+  bottom: 20px;
+  z-index: 2;
+  transition: ease all 2.3s;
+  transform-style: preserve-3d;
+  transform: translateZ(0px);
+}
+
+.card .cover:after {
+  content: "";
+  position: absolute;
+  top: 0px;
+  left: 0px;
+  right: 0px;
+  bottom: 0px;
+  z-index: 2;
+  transition: ease all 1.3s;
+  background: rgba(0, 0, 0, 0.4);
+}
+
+.all-phone-image {
+  width: 50%;
+  display: flex;
+  place-self: center;
+  margin: auto;
+  position: relative;
+  top: 15%;
+}
+
+.card .cover h1 {
+  font-weight: 600;
+  position: absolute;
+  bottom: 35px;
+  left: 50px;
+  width: 70%;
+  color: rgb(250, 252, 250);
+  transform-style: preserve-3d;
+  transition: ease all 2.3s;
+  z-index: 3;
+  font-size: 1.5em;
+  transform: translateZ(0px);
+}
+
+.card .cover .price {
+  font-weight: 300;
+  position: absolute;
+  top: 35px;
+  right: 50px;
+  color: white;
+  transform-style: preserve-3d;
+  transition: ease all 2.3s;
+  z-index: 4;
+  font-size: 1.5em;
+  transform: translateZ(0px);
+}
+.each-phone-image {
+  width: 120px;
+  margin: auto;
+  /* background: url(../images/); */
+}
+.card .card-back {
+  position: absolute;
+  height: 100%;
+  width: 100%;
+  background: #0b0f08;
+  transform-style: preserve-3d;
+  transition: ease all 2.3s;
+  transform: translateZ(-1px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.card .card-back a {
+  transform-style: preserve-3d;
+  transition:
+    ease transform 2.3s,
+    ease background 0.5s;
+  transform: translateZ(-1px) rotatey(-180deg);
+  background: transparent;
+  border: 1px solid rgb(233, 122, 122);
+  font-weight: 400;
+  font-size: 1.1em;
+  color: white;
+  padding: 14px 32px;
+  outline: none;
+  text-decoration: none;
+}
+
+.card .card-back a:hover {
+  background-color: white;
+  color: #b60213;
+  font-weight: 400;
+}
+
+/* filter container style */
+.filters {
+  position: sticky;
+  top: 6.5rem;
+}
+
+.filters h4 {
+  font-weight: 400;
+  margin: 1.5rem 0 0.5rem;
+}
+
+.search-input {
+  padding: 0.25rem;
+  background: rgb(248, 236, 236);
+  border-radius: var(--radius);
+  border-color: transparent;
+  letter-spacing: var(--spacing);
+}
+
+.search-input::placeholder {
+  text-transform: capitalize;
+}
+.brands {
+  height: 180px;
+  overflow-y: scroll;
+}
+::-webkit-scrollbar {
+  display: none;
+}
+
+.brand-btn {
+  display: block;
+  margin: 0.25em 0;
+  padding: 0.25rem;
+  text-transform: capitalize;
+  background: transparent;
+  border-color: transparent;
+  letter-spacing: var(--spacing);
+  color: #b69c9e;
+  cursor: pointer;
+  transition: var(--transition);
+}
+
+.brand-btn:hover {
+  color: rgb(245, 65, 65);
+}
+
+.price-filter {
+  background: var(--clr-grey-5) !important;
+  color: var(--clr-grey-5);
+}
+
+.filter-error {
+  position: absolute;
+  top: 5rem;
+  left: 0;
+  width: 100%;
+  text-align: center;
+  margin-top: 4rem;
+}
+
+.loader {
+  width: 60%;
+  margin-left: auto;
+}
+
+.loader strong {
+  font-size: 3em;
+}
+
+.loader .spinner-border {
+  padding: 30px;
+}
