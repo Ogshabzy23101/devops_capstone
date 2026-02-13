@@ -17,10 +17,13 @@ jobs:
           node-version: "20"
 
       - name: Install dependencies
+        working-directory: app/phone-e-commerce
         run: npm ci
 
       - name: Prettier check
+        working-directory: app/phone-e-commerce
         run: npm run format:check
 
       - name: ESLint
+        working-directory: app/phone-e-commerce
         run: npm run lint
