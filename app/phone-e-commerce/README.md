@@ -90,7 +90,7 @@ docker run -p 8080:80 phone-ecommerce:1.0
 
 Access in browser:
 
-http://localhost:8080
+<http://localhost:8080>
 
 Optional improvement (more professional):
 
