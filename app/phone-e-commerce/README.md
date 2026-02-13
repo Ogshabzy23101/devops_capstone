@@ -78,9 +78,31 @@ Development Workflow 1. Create a feature branch 2. Make changes 3. Commit and pu
 
 This mimics real-world DevOps and team workflows.
 
+Docker Usage
+
+Build the image:
+
+docker build -t phone-ecommerce:1.0 .
+
+Run the container:
+
+docker run -p 8080:80 phone-ecommerce:1.0
+
+Access in browser:
+
+http://localhost:8080
+
+Optional improvement (more professional):
+
+Add:
+
+Production Deployment (Planned)
+This image will be deployed to AWS EC2 as part of the DevOps Capstone infrastructure.
+
+That shows direction and systems thinking.
+
 Future Improvements
 • Add deployment workflow (GitHub Pages / Netlify)
-• Dockerize the application
 • Add unit tests
 • Backend integration
 • CI/CD with cloud infrastructure

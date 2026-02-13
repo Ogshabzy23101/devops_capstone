@@ -1,4 +1,4 @@
-FROM nginx:alphine
+FROM nginx:alpine
 
 #remove default nginx static content
 RUN rm -rf /usr/share/nginx/html/*
