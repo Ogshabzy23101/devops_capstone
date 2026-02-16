@@ -3,6 +3,9 @@ name: Docker Image Build and Push
 on:
   push:
     branches: [main]
+    paths:
+      - 'app/phone-e-commerce/**'
+      - '.github/workflows/docker_image.yml'
 
 jobs:
   build:
@@ -23,4 +26,4 @@ jobs:
           context: ./app/phone-e-commerce
           push: true
           tags: ${{ secrets.DOCKER_USERNAME }}/phone-e-commerce:latest
-          
+
