@@ -2,6 +2,9 @@
   hosts: web
   become: true  
 
+  vars_files:
+    - ../group_vars/main.yml
+
   roles:
     - common
     - web
