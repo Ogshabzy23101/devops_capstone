@@ -17,3 +17,8 @@
     enabled: yes
     state: started
   tags: docker
+
+- name: "diploy docker container"
+  import_tasks: deploy_docker.yml
+  tags: docker
+  
