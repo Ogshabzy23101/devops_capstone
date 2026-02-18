@@ -1,0 +1,21 @@
+- name: "pull docker image"
+  docker_image:
+    name: "{{ docker_image_name }}"
+    tag: "{{ docker_image_tag }}"
+    source: pull
+  tags: docker
+
+- name: "stop and remove existing container"
+  docker_container:
+    name: "{{ docker_container_name }}"
+    state: absent
+  tags: docker 
+
+- name: "run docker container"
+  docker_container:
+    name: "{{ docker_container_name }}"
+    image: "{{ docker_image_name }}:{{ docker_image_tag }}"
+    state: started
+    restart_policy: always
+    ports:
+      - "{{ host_port }}:{{ docker_container_port }}"
