@@ -1,0 +1,45 @@
+name: "Run Docker Container on EC2 Instance"
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - "infra/ansible/**"
+      - ".github/workflows/run_container.yml"
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.x"
+
+      - name: Install Ansible
+        run: |
+          pip install ansible
+
+      - name: Install community.docker collection
+        run: |
+          ansible-galaxy collection install community.docker
+
+      - name: Create SSH key file
+        run: |
+          mkdir -p ~/.ssh
+          echo "${{ secrets.EC2_SSH_KEY }}" > ~/.ssh/devops_capstone.pem
+          chmod 600 ~/.ssh/devops_capstone.pem
+
+      - name: Run Ansible playbook
+        run: |
+          cd infra/ansible && \
+          ansible-playbook \
+            -i inventory/hosts.ini \
+            playbooks/site.yml \
+            -e "ansible_host=${{ secrets.EC2_HOST }}" \
+            -e "ansible_user=${{ secrets.EC2_USERNAME }}" \
+            -e "ansible_ssh_private_key_file=~/.ssh/devops_capstone.pem"
