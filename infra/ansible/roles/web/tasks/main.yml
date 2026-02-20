@@ -2,13 +2,7 @@
   apt:
     name: docker.io
     state: present
-  tags: docker
-
-- name: "add ec2-user to docker group"
-  user:
-    name: ec2-user
-    groups: docker
-    append: yes
+    update_cache: yes
   tags: docker
 
 - name: "enable and start docker service"
@@ -16,6 +10,22 @@
     name: docker
     enabled: yes
     state: started
+  tags: docker
+
+- name: install python + pip
+  apt:
+    name: "{{ item }}"
+    state: present
+    update_cache: yes
+  loop:
+    - python3
+    - python3-pip
+  tags: docker
+
+- name: install docker sdk for python
+  pip:
+    name: docker
+    executable: pip3
   tags: docker
 
 - name: "diploy docker container"
