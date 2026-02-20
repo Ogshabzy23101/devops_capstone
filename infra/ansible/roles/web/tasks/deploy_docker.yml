@@ -19,3 +19,4 @@
     restart_policy: always
     ports:
       - "{{ host_port }}:{{ docker_container_port }}"
+  tags: docker

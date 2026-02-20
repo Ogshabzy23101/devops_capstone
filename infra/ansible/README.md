@@ -2,7 +2,7 @@
 
 This folder contains the Ansible code used to deploy the Phone E-Commerce Docker image to an AWS EC2 instance.
 
-The playbook connects to EC2 via SSH, installs required packages (and Docker if needed), pulls the latest Docker image from Docker Hub, and runs the container with the configured port mapping.
+The playbook connects to EC2 via SSH, installs required packages and Docker, pulls the latest Docker image from Docker Hub, and runs the container with the configured port mapping.
 
 What this deploys
 
@@ -16,12 +16,12 @@ Folder structure
 - playbooks/site.yml
   Main entry point that runs the roles in order.
 - roles/common/
-  System preparation tasks (updates + essential packages + Docker setup if included).
+  System preparation tasks (updates + essential packages + Docker setup).
 - roles/web/
   Application deployment tasks (pull image, remove old container, start new container).
 - inventory/hosts.ini
   Target hosts (EC2) definition.
-- group_vars/web.yml
+- group_vars/main.yml
   Variables for the web host group (image name/tag, container name, ports).
 
 Prerequisites
@@ -31,29 +31,27 @@ On your local machine (control node):
 - Ansible installed
 - SSH access to EC2 (keypair .pem)
 - EC2 Security Group allows:
-  - SSH (22) from your IP
-  - HTTP (80) from anywhere (or your IP)
+  - SSH (22) from control node IP
+  - HTTP (80) from anywhere
 
 On EC2 (target host):
 
 - Ubuntu instance
-- Python installed (usually already available on Ubuntu)
-- Docker installed if not handled by the playbook
+- Python installed
+- Docker installed
 
 Configure inventory
 
-Edit inventory/hosts.ini to match your EC2 details:
+Edit inventory/hosts.ini to match EC2 details:
 
 Example:
 
 [web]
 ec2 ansible_host=<EC2_PUBLIC_IP> ansible_user=ubuntu ansible_ssh_private_key_file=~/.ssh/.pem
 
-Tip: If you are using Elastic IP, put the Elastic IP here so it stays stable.
-
 Configure variables
 
-Edit group_vars/web.yml:
+Edit group_vars/main.yml:
 
 common_packages:
 • git
