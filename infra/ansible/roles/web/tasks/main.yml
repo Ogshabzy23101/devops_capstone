@@ -12,15 +12,15 @@
     state: started
   tags: docker
 
-# - name: install python + pip
-#   apt:
-#     name: "{{ item }}"
-#     state: present
-#     update_cache: yes
-#   loop:
-#     - python3
-#     - python3-pip
-#   tags: docker
+- name: install python + pip
+  apt:
+    name: "{{ item }}"
+    state: present
+    update_cache: yes
+  loop:
+    - python3
+    - python3-pip
+  tags: docker
 
 - name: install docker sdk for python
   apt:
