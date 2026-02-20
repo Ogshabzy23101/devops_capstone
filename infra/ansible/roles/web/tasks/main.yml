@@ -1,35 +1,31 @@
-- name: "install docker"
+- name: Update apt cache
   apt:
-    name: docker.io
-    state: present
     update_cache: yes
   tags: docker
 
-- name: "enable and start docker service"
+- name: Install Docker + Python deps for Ansible docker modules
+  apt:
+    name:
+      - docker.io
+      - python3
+      - python3-docker
+    state: present
+  tags: docker
+
+- name: Add user to docker group
+  user:
+    name: "{{ ansible_user }}"
+    groups: docker
+    append: yes
+  tags: docker
+
+- name: Enable and start Docker service
   service:
     name: docker
     enabled: yes
     state: started
   tags: docker
 
-- name: install python + pip
-  apt:
-    name: "{{ item }}"
-    state: present
-    update_cache: yes
-  loop:
-    - python3
-    - python3-pip
-  tags: docker
-
-- name: install docker sdk for python
-  apt:
-    name: python3-docker
-    state: present
-    update_cache: yes
-  tags: docker
-
-- name: "diploy docker container"
+- name: Deploy docker container
   import_tasks: deploy_docker.yml
   tags: docker
-  
